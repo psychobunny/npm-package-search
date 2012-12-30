@@ -49,6 +49,11 @@ registry every `opts.interval` milliseconds.
 
 For a search string `query`, return matching packages in `cb(err, results)`.
 
+## search.update(cb)
+
+Synchronize with the npm registry. `cb` fires when the synchronization is
+complete.
+
 ## search.close()
 
 If `opts.interval` was specified, clear the update interval.
