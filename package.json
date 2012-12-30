@@ -1,0 +1,28 @@
+{
+    "name" : "npm-package-search",
+    "version" : "0.0.0",
+    "description" : "search npm with a local synchronized package list",
+    "main" : "index.js",
+    "dependencies" : {
+        "quotemeta" : "~0.0.0",
+        "npm-package-sync" : "~0.1.0"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/substack/npm-package-search.git"
+    },
+    "homepage" : "https://github.com/substack/npm-package-search",
+    "keywords" : [
+        "npm",
+        "search",
+        "cache",
+        "replicate",
+        "synchronize"
+    ],
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    },
+    "license" : "MIT"
+}
