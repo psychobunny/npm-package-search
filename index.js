@@ -29,21 +29,27 @@ module.exports = function (file, opts) {
         function onsync () {
             if (f.closed) return;
             ready = true;
-            queue.splice(0).forEach(function (args) {
-                search(sync.packages, args[0], args[1]);
-            });
+            queue.splice(0).forEach(function (f) { f() });
         }
     });
     
     var f = function (query, cb) {
         if (f.closed) return;
-        if (!ready) return queue.push([ query, cb ]);
-        search(sync.packages, query, cb);
+        if (!ready) queue.push(function () { f(query, cb) })
+        else search(sync.packages, query, cb)
     };
     
     f.close = function () {
         f.closed = true;
         if (iv) clearInterval(iv);
+    };
+    
+    f.update = function (cb) {
+        if (f.closed) return;
+        if (!ready) return queue.push(function () { f.update(cb) })
+        
+        if (cb) sync.once('sync', cb);
+        sync.update(filter)
     };
     
     return f;
