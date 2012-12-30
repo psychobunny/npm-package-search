@@ -45,6 +45,10 @@ Return a function `search(query, cb)` that you can use to search `file`.
 If `opts.interval` is set, synchronize the package list at `file` with the npm
 registry every `opts.interval` milliseconds.
 
+If `opts.filter` is set, you can return a custom filter function to pass along
+to the underlying
+[npm-package-sync](https://github.com/substack/npm-package-sync) library.
+
 ## search(query, cb)
 
 For a search string `query`, return matching packages in `cb(err, results)`.

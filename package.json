@@ -1,6 +1,6 @@
 {
     "name" : "npm-package-search",
-    "version" : "0.0.0",
+    "version" : "0.1.0",
     "description" : "search npm with a local synchronized package list",
     "main" : "index.js",
     "dependencies" : {
