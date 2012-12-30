@@ -7,6 +7,13 @@ module.exports = function (file, opts) {
         file = opts.file;
     }
     if (!opts) opts = {};
+    if (!opts.filter) opts.filter = function (pkg) {
+        return {
+            name: pkg.name,
+            description: pkg.description,
+            keywords: pkg.keywords
+        };
+    };
     
     var queue = [];
     var sync = null;
@@ -17,10 +24,10 @@ module.exports = function (file, opts) {
         if (f.closed) return;
         sync = f.sync = sync_;
         
-        if (!sync.exists) sync.update(filter);
+        if (!sync.exists) sync.update(opts.filter);
         
         iv = opts.interval && setInterval(function () {
-            sync.update(filter);
+            sync.update(opts.filter);
         }, opts.interval);
         
         if (sync.packages.length) onsync()
@@ -49,19 +56,11 @@ module.exports = function (file, opts) {
         if (!ready) return queue.push(function () { f.update(cb) })
         
         if (cb) sync.once('sync', cb);
-        sync.update(filter)
+        sync.update(opts.filter)
     };
     
     return f;
 };
-
-function filter (pkg) {
-    return {
-        name: pkg.name,
-        description: pkg.description,
-        keywords: pkg.keywords
-    };
-}
 
 function search (packages, query, cb) {
     var re;
