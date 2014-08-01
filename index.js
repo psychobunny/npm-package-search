@@ -11,7 +11,9 @@ module.exports = function (file, opts) {
         return {
             name: pkg.name,
             description: pkg.description,
-            keywords: pkg.keywords
+            keywords: pkg.keywords,
+            author: pkg.author,
+            repository: pkg.repository
         };
     };
     
